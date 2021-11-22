@@ -1,2 +1,5 @@
 # WallpaperEngine
 WallpaperEngineで使用できる壁紙の作成リポジトリ
+
+GitHubのコントリビューションをAPIで取得してWallpaperEngineで使ってみようという試みです。  
+ついでに自分の草生やしも兼ねてます。
