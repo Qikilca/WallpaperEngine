@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ゆ</title>
+    <style>
+        #animate-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="flip">
+            <div id="animate-text">ゆ</div>
+        </div>
+    </div>
+    <script>
+        const textElement = document.getElementById('animate-text');
+        let position = 100; // 初期位置
+
+        function transformStyleUpdate(element, styleName, value) {
+            const transformStyles = element.style.transform.split(" ");
+            const style = transformStyles.find((style) => style.startsWith(styleName));
+
+            // styleがあれば、その値を更新する
+            if (style) {
+                const styleIndex = transformStyles.indexOf(style);
+                transformStyles[styleIndex] = `${styleName}(${value})`;
+            } else {
+                transformStyles.push(`${styleName}(${value})`);
+            }
+
+            // console.log(transformStyles);
+            element.style.transform = transformStyles.join(" ");
+        }
+
+
+        function animate(timestamp) {
+            // 1フレームごとに実行される処理
+
+            transformStyleUpdate(textElement, "rotateZ", "1deg");
+            position--; // 位置を更新
+            transformStyleUpdate(textElement, "translateX", `${position}%`); // 位置を反映
+            // textElement.style.transform = `translateX(${position}%)`; // 位置を反映
+
+            if (position < -100) {
+                position = 100; // 画面端に到達したら初期位置に戻す
+            }
+
+            // console.log(textElement.style.transform);
+            requestAnimationFrame(animate); // 次のフレームの描画を待つ
+        }
+
+        animate(); // アニメーションの開始
+    </script>
+
+</body>
+<script src="/src/script.js"></script>
+
+</html>
